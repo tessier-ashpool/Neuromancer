@@ -4,7 +4,7 @@
 # Config Github Settings
 github_username = "tessier-ashpool"
 github_repo     = "Vaprobash"
-github_branch   = "1.2.0"
+github_branch   = "master"
 github_url      = "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}"
 
 # Server Configuration
@@ -66,6 +66,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "neuromancer"
+
   config.vm.hostname = hostname
 
   config.vm.network :private_network, ip: server_ip
@@ -211,6 +212,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Install Beanstalkd
   # config.vm.provision "shell", path: "#{github_url}/scripts/beanstalkd.sh"
 
+  # Install Monit
+  config.vm.provision "shell", path: "#{github_url}/scripts/monit.sh"
+
   # Install Heroku Toolbelt
   # config.vm.provision "shell", path: "https://toolbelt.heroku.com/install-ubuntu.sh"
 
@@ -228,7 +232,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "shell", path: "#{github_url}/scripts/nodejs.sh", privileged: false, args: nodejs_packages.unshift(nodejs_version, github_url)
 
   # Install Ruby Version Manager (RVM)
-  config.vm.provision "shell", path: "#{github_url}/scripts/rvm.sh", privileged: false, args: ruby_gems.unshift(ruby_version)
+  # config.vm.provision "shell", path: "#{github_url}/scripts/rvm.sh", privileged: false, args: ruby_gems.unshift(ruby_version)
 
   ####
   # Frameworks and Tooling
