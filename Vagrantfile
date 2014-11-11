@@ -47,6 +47,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provision :chef_solo do |chef|
+    chef.add_recipe "monit"
+    chef.add_recipe "nvm"
+    chef.add_recipe "build-essential"
+    chef.add_recipe "phantomjs"
     chef.add_recipe "apache2"
     chef.json = { :apache => { :default_site_enabled => true } }
   end
