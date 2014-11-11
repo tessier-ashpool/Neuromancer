@@ -3,10 +3,10 @@ Neuromancer
 
 Make sure to install `vagrant plugin install vagrant-omnibus`
 
-*Install gems with `bundle`
+Install gems with `bundle`
 
-*Configure `Vagrantfile`
+Configure `Vagrantfile`
 
-*Run `librarian-chef install` in the main directory
+Run `librarian-chef install` in the main directory
 
-*Run `vagrant up` 
+Run `vagrant up` & `vagrant ssh`
