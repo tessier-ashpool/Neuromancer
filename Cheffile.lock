@@ -1,0 +1,32 @@
+SITE
+  remote: https://supermarket.getchef.com/api/v1
+  specs:
+    apache2 (2.0.0)
+      iptables (>= 0.0.0)
+      logrotate (>= 0.0.0)
+      pacman (>= 0.0.0)
+    chef_gem (0.1.0)
+    iptables (0.14.0)
+    logrotate (1.7.0)
+    pacman (1.1.1)
+
+GIT
+  remote: https://github.com/findsyou/cookbooks
+  ref: postgresql-improvements
+  sha: ae23e8bb35e7fddf0709bd986742b38618b4db1e
+  specs:
+    postgresql (0.11.1)
+
+GIT
+  remote: https://github.com/fnichol/chef-rvm
+  ref: master
+  sha: 8a877e9b497f8fb06dfe6f5975561331b3924243
+  specs:
+    rvm (0.10.1)
+      chef_gem (>= 0.0.0)
+
+DEPENDENCIES
+  apache2 (>= 2.0.0)
+  postgresql (>= 0)
+  rvm (>= 0)
+
