@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 # Config Github Settings
-github_username = "fideloper"
+github_username = "tessier-ashpool"
 github_repo     = "Vaprobash"
 github_branch   = "1.2.0"
 github_url      = "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}"
@@ -49,9 +49,11 @@ public_folder         = "/vagrant"
 nodejs_version        = "latest"   # By default "latest" will equal the latest stable version
 nodejs_packages       = [          # List any global NodeJS packages that you want to install
   "grunt-cli",
-  #"gulp",
+  "gulp",
   "bower",
-  #"yo",
+  "yo",
+  "express",
+  "forever"
 ]
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
