@@ -13,6 +13,7 @@ server_cpus           = "2"   # Cores
 server_memory         = "1024" # MB
 server_swap           = "768" # Options: false | int (MB) - Guideline: Between one or two times the server_memory
 
+config_folders = ['AKQA-work']
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
@@ -26,12 +27,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.hostname = hostname
 
+  config_folders.each do | folder_name |
+    config.vm.synced_folder "~/"+folder_name, "/home/vagrant/" + folder_name, create: true
+  end
+
   config.vm.network :forwarded_port, guest: 80, host: 8080
 
   # If using VirtualBox
   config.vm.provider :virtualbox do |vb|
 
-    vb.name = "Neuromancer"
+    vb.name = "Neuromancer".
 
     # Set server cpus
     vb.customize ["modifyvm", :id, "--cpus", server_cpus]
