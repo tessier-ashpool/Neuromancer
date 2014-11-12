@@ -3,7 +3,7 @@
 
 # Config Github Settings
 # Server Configuration
-hostname        = "neuromancer.dev"
+hostname = "neuromancer.dev"
 
 # Set a local private network IP address.
 # See http://en.wikipedia.org/wiki/Private_network for explanation
