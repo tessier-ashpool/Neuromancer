@@ -55,4 +55,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.json = { :apache => { :default_site_enabled => true } }
   end
 
+  config.vm.provision :shell, :path => "bootstrap.sh"
+
 end
