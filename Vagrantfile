@@ -31,7 +31,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # If using VirtualBox
   config.vm.provider :virtualbox do |vb|
 
-    vb.name = "Neuromancer".
+    vb.name = "Neuromancer"
 
     # Set server cpus
     vb.customize ["modifyvm", :id, "--cpus", server_cpus]
