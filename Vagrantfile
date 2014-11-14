@@ -1,17 +1,9 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# Config Github Settings
-# Server Configuration
-hostname = "neuromancer.dev"
+require './config/default'
+include VConfig
 
-# Set a local private network IP address.
-# See http://en.wikipedia.org/wiki/Private_network for explanation
-# You can use the following IP ranges:
-server_ip             = "192.168.22.10"
-server_cpus           = "2"   # Cores
-server_memory         = "1024" # MB
-server_swap           = "768" # Options: false | int (MB) - Guideline: Between one or two times the server_memory
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
@@ -22,22 +14,29 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
   config.omnibus.chef_version = :latest
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "hashicorp/precise64"
+  config.vm.box = $config[:default_box]
 
-  config.vm.hostname = hostname
+  config.vm.hostname = $config[:hostname]
 
-  config.vm.network :forwarded_port, guest: 80, host: 8080
+  config.vm.network :forwarded_port, guest: 80, host: $config[:port]
+  config.vm.network :private_network, ip: $config[:server_ip]
+
+  if $config[:database] != '' # If database is set.
+    config.vm.network :forwarded_port, guest: 3306, host: 3306
+  end
+
+  config.vm.synced_folder '.', '/vagrant', owner: 'www-data', group: 'www-data', :mount_options => ['dmode=777,fmode=777']
 
   # If using VirtualBox
   config.vm.provider :virtualbox do |vb|
 
-    vb.name = "Neuromancer"
+    vb.name = $config[:vm_hostname]
 
     # Set server cpus
-    vb.customize ["modifyvm", :id, "--cpus", server_cpus]
+    vb.customize ["modifyvm", :id, "--cpus", $config[:cpus]]
 
     # Set server memory
-    vb.customize ["modifyvm", :id, "--memory", server_memory]
+    vb.customize ['modifyvm', :id, '--memory', $config[:ram]]
 
     # Set the timesync threshold to 10 seconds, instead of the default 20 minutes.
     # If the clock gets more than 15 minutes out of sync (due to your laptop going
@@ -47,9 +46,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provision :chef_solo do |chef|
-    chef.add_recipe "monit"
-    chef.add_recipe "nvm"
     chef.add_recipe "build-essential"
+    chef.add_recipe "nvm"
     chef.add_recipe "phantomjs"
     chef.add_recipe "apache2"
     chef.json = { :apache => { :default_site_enabled => true } }
