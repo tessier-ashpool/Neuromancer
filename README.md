@@ -11,3 +11,6 @@ configure `./config/default.rb` to your specifications
 
 run `vagrant up`
 
+### Coming Soon
+
+More Configs, Recipe Support, User Setup with Roles, etc
