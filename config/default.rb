@@ -1,14 +1,14 @@
 module VConfig
   # Main container of the variables.
    $config = {
-   	  default_box:      'hashicorp/precise64'
-      hostname:         'neuromancer.dev'
-      vm_name:          'neuromancer'
+   	  default_box:      'hashicorp/precise64',
+      hostname:         'neuromancer.dev',
+      vm_name:          'neuromancer',
       # General configuration
-      server_ip:        '192.168.22.10'
+      server_ip:        '192.168.22.10',
       port:             8080, # Perhaps you fancy different port?
       ram:              '1024', # Amount of RAM allowed for this machine.
-      cpus:             '2'
+      cpus:             '2',
 
       # Apache2/Nginx
       service:          'apache2', # nginx|apache2
